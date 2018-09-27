@@ -31,6 +31,20 @@
 
 //Code Here
 
+class Employee {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+  }
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`
+  }
+
+
+}
+Employee
 
 
 ////////// PROBLEM 2 //////////
@@ -51,7 +65,24 @@
 
 //Code Here
 
+class Manager extends Employee {
+  constructor(first_name, last_name, email, age, reports) {
+    super(first_name, last_name, email, age)
+    this.reports = [];
+  }
+  hire(employee) {
+    this.reports.push(employee)
+  }
+  fire(index) {
+    this.reports.splice(index, 1)
+  }
+}
+// Manager.hire(employee)
 
+
+// var logan = new Manager('logan', 'smith', 'an email', 150)
+// var Daniel = new Manager("Daniel", "DeHoyos", "gmail.com", 28)
+// Manager.hire(Daniel)
 
 ////////// PROBLEM 3 //////////
 
@@ -76,6 +107,44 @@
 */
 
 //Code Here
+
+
+class ProgressiveManager extends Manager {
+  constructor(first_name, last_name, email, age, reports) {
+    super(first_name, last_name, email, age, reports)
+
+    this.reports = [];
+    this.title = 'Not a manager';
+    this.bonus = 0;
+  }
+  titleUpdate(employee) {
+    if (employee >= 101) {
+      return this.title = "Bestest Manager"
+    } else if (employee >= 51) {
+      return this.title = "Manager Plus"
+    } else if (employee >= 11) {
+      return this.title = "Manager"
+    } else if (employee >= 4) {
+      return this.title = "Mostly Manager"
+    } else if (employee >= 1) {
+      return this.title = "Barely Manager"
+    } else return this.title = "Not a manager"
+  }
+  fire(index) {
+    this.reports.splice(index, 1)
+    this.bonus += 100;
+    this.titleUpdate(this.reports.length)
+  }
+  hire(employee) {
+    this.reports.push(employee)
+    this.titleUpdate(this.reports.length)
+  }
+}
+
+
+
+
+
 
 
 
